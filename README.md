@@ -10,5 +10,6 @@ Currently, two official plugins are available:
 
 - # USER INTERFACE
 
-![Ecommerce application ui](https://github.com/vaaluvishnu5146/Ecommerce-Starter-Template/assets/22257731/5e8e8836-afc2-4a3f-b729-6b8a2668edd3)
+![Admin dashboard application ui](https://github.com/vaaluvishnu5146/dashboard-starter-template/assets/22257731/07f3e299-335a-4525-a157-f444c3e8487c)
+
 
