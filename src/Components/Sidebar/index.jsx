@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import Icons from "../../Assets/icons";
+import NavItemExpandable from "../NavItem/NavItemExpandable";
 
 export default function Sidebar() {
   const sidebarRef = useRef(null);
@@ -42,6 +43,9 @@ export default function Sidebar() {
         </Link>
       </li>
 
+      <NavItemExpandable id="nav-item-1" label="Nav 1" />
+      <NavItemExpandable id="nav-item-2" label="Nav 2" />
+
       <hr className="sidebar-divider d-none d-md-block" />
 
       <div className="text-center d-none d-md-inline">
@@ -50,7 +54,7 @@ export default function Sidebar() {
           id="sidebarToggle"
           onClick={handleSidebarToggle}
         >
-          <Icons.arrowRight />
+          <Icons.arrowRight color="#FFFFFF" />
         </button>
       </div>
     </ul>

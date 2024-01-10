@@ -2,14 +2,18 @@ import {
   FiBell,
   FiMail,
   FiArrowLeft,
-  FiArrowRight,
+  FiChevronRight,
+  FiChevronDown,
   FiSearch,
+  FiCloudLightning,
 } from "react-icons/fi";
 
 export default {
   notification: FiBell,
   mail: FiMail,
   arrowLeft: FiArrowLeft,
-  arrowRight: FiArrowRight,
+  arrowRight: FiChevronRight,
+  arrowDown: FiChevronDown,
   search: FiSearch,
+  lightning: FiCloudLightning,
 };
