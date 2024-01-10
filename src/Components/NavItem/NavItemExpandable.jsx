@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import PropTypes from "prop-types";
 
 export default function NavItemExpandable({ id = "", label = "" }) {
   const navItemRef = useRef(null);
@@ -48,6 +49,6 @@ export default function NavItemExpandable({ id = "", label = "" }) {
 }
 
 NavItemExpandable.propTypes = {
-  id: String,
-  label: String,
+  id: PropTypes.string,
+  label: PropTypes.string,
 };
