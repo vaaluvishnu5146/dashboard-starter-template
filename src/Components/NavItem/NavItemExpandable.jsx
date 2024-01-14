@@ -1,6 +1,12 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default function NavItemExpandable({ id = "", label = "" }) {
+export default function NavItemExpandable({
+  id = "",
+  label = "",
+  routes = [],
+}) {
   const navItemRef = useRef(null);
 
   function handleNavItemToggle() {
@@ -34,13 +40,15 @@ export default function NavItemExpandable({ id = "", label = "" }) {
       </a>
       <div id={id} className={"collapse"}>
         <div className="bg-white py-2 collapse-inner rounded">
-          <h6 className="collapse-header">Custom Components:</h6>
-          <a className="collapse-item" href="buttons.html">
-            Buttons
-          </a>
-          <a className="collapse-item" href="cards.html">
-            Cards
-          </a>
+          {routes.map((route, index) => (
+            <Link
+              className="collapse-item"
+              to={route.to}
+              key={`${route.id}-${index}`}
+            >
+              {route.label}
+            </Link>
+          ))}
         </div>
       </div>
     </li>
@@ -48,6 +56,7 @@ export default function NavItemExpandable({ id = "", label = "" }) {
 }
 
 NavItemExpandable.propTypes = {
-  id: String,
-  label: String,
+  id: PropTypes.string,
+  label: PropTypes.string,
+  routes: PropTypes.array,
 };

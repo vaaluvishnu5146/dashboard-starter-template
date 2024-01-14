@@ -3,6 +3,31 @@ import { Link } from "react-router-dom";
 import Icons from "../../Assets/icons";
 import NavItemExpandable from "../NavItem/NavItemExpandable";
 
+const PRODUCT_ROUTES = [
+  {
+    label: "Create Product",
+    to: "/dashboard/products/create",
+    id: "createProduct",
+  },
+  {
+    label: "Manage Products",
+    to: "/dashboard/products",
+    id: "manageProducts",
+  },
+];
+const OFFER_ROUTES = [
+  {
+    label: "Create Offer",
+    to: "/dashboard/offers/create",
+    id: "createProduct",
+  },
+  {
+    label: "Manage Offers",
+    to: "/dashboard/offers",
+    id: "manageOffers",
+  },
+];
+
 export default function Sidebar() {
   const sidebarRef = useRef(null);
 
@@ -29,22 +54,12 @@ export default function Sidebar() {
 
       <hr className="sidebar-divider" />
 
-      <li className="nav-item">
-        <Link className="nav-link" to="/dashboard/products">
-          <i className="fas fa-fw fa-table"></i>
-          <span>Products</span>
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link className="nav-link" to="/dashboard/settings">
-          <i className="fas fa-fw fa-table"></i>
-          <span>Settings</span>
-        </Link>
-      </li>
-
-      <NavItemExpandable id="nav-item-1" label="Nav 1" />
-      <NavItemExpandable id="nav-item-2" label="Nav 2" />
+      <NavItemExpandable
+        id="products"
+        label="Products"
+        routes={PRODUCT_ROUTES}
+      />
+      <NavItemExpandable id="offer" label="Offers" routes={OFFER_ROUTES} />
 
       <hr className="sidebar-divider d-none d-md-block" />
 
