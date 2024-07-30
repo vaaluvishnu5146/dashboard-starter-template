@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useJwt } from "react-jwt";
+import { showToast } from "../Assets/toasts";
 
 const AuthContext = createContext({
   isLoggedIn: false,
@@ -21,6 +22,20 @@ export default function AuthContextProvider({ children }) {
   useEffect(() => {
     if (decodedToken && !isExpired) {
       setIsLoggedIn(true);
+    }
+  }, [decodedToken, isExpired]);
+
+  useEffect(() => {
+    if (decodedToken && !isExpired) {
+      fetch(`http://localhost:3000/api/users/user/${decodedToken._id}`, {
+        method: "GET"
+      }).then((response) => response.json())
+      .then((result) => {
+        showToast(result.message)
+        setCurrentUser(result.data)
+      }).catch((error) => {
+        showToast(error.message, "error")
+      })
     }
   }, [decodedToken, isExpired]);
 

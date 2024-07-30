@@ -12,6 +12,8 @@ import ManageProducts from "./Pages/Products/ManageProducts";
 import ManageDiscounts from "./Pages/Discounts/ManageDiscounts";
 import { useAuthContext } from "./Context/AuthContext";
 import NotFound from "./Pages/NotFound";
+import CreateFood from "./Pages/Food";
+import ManageFoods from "./Pages/Food/ManageFoods";
 
 function App() {
   const { isLoggedIn } = useAuthContext();
@@ -28,6 +30,8 @@ function App() {
             <Route Component={Discounts} path="/dashboard/offers/create" />
             <Route Component={ManageDiscounts} path="/dashboard/offers/" />
             <Route Component={Settings} path="/dashboard/settings" />
+            <Route Component={CreateFood} path="/dashboard/food/create" />
+            <Route Component={ManageFoods} path="/dashboard/food/manage" />
           </Route>
         )}
         <Route Component={NotFound} path="*" />

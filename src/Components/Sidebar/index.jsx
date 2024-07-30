@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import Icons from "../../Assets/icons";
 import NavItemExpandable from "../NavItem/NavItemExpandable";
+import { useAuthContext } from '../../Context/AuthContext';
 
 const PRODUCT_ROUTES = [
   {
@@ -27,10 +27,32 @@ const OFFER_ROUTES = [
     id: "manageOffers",
   },
 ];
+const FOOD_ROUTES = [{
+    label: "Create Food",
+    to: "/dashboard/food/create",
+    id: "createFood",
+  },
+  {
+    label: "Manage Foods",
+    to: "/dashboard/food/manage",
+    id: "manageFoods",
+  },
+];
+const USER_ROUTES = [{
+    label: "Create User",
+    to: "/dashboard/user/create",
+    id: "createUser",
+  },
+  {
+    label: "Manage Users",
+    to: "/dashboard/user/manage",
+    id: "manageUser",
+  },
+];
 
 export default function Sidebar() {
   const sidebarRef = useRef(null);
-
+  const {currentUser = {}} = useAuthContext();
   function handleSidebarToggle() {
     if (sidebarRef.current.classList.contains("toggled")) {
       sidebarRef.current.classList.remove("toggled");
@@ -60,6 +82,20 @@ export default function Sidebar() {
         routes={PRODUCT_ROUTES}
       />
       <NavItemExpandable id="offer" label="Offers" routes={OFFER_ROUTES} />
+      <NavItemExpandable id = "offer"
+      label = "Foods"
+      routes = {
+        FOOD_ROUTES
+      }
+      />
+      {currentUser && currentUser.isSuperAdmin 
+        ? <NavItemExpandable 
+        id="users"
+        label = "Users"
+        routes = {
+          USER_ROUTES
+        }
+      />: null}
 
       <hr className="sidebar-divider d-none d-md-block" />
 
