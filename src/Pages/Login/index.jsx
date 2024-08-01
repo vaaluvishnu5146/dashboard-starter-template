@@ -15,7 +15,7 @@ export default function Login() {
     const password = passwordRef.current.value;
 
     if (email.length > 0 && password.length > 0) {
-      fetch("http://localhost:3000/api/auth/admin/signin", {
+      fetch("http://localhost:3003/api/auth/admin/signin", {
         method: "POST",
         body: JSON.stringify({
           email,

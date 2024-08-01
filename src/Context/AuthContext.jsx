@@ -27,7 +27,7 @@ export default function AuthContextProvider({ children }) {
 
   useEffect(() => {
     if (decodedToken && !isExpired) {
-      fetch(`http://localhost:3000/api/users/user/${decodedToken._id}`, {
+      fetch(`http://localhost:3003/api/users/user/${decodedToken._id}`, {
         method: "GET"
       }).then((response) => response.json())
       .then((result) => {

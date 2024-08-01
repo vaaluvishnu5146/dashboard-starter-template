@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import TextInput from "../../Elements/TextInput";
 import { showToast } from "../../Assets/toasts";
+import { useAuthContext } from "../../Context/AuthContext";
 
 const initialState = {
   name: "",
@@ -10,6 +11,7 @@ const initialState = {
 };
 
 export default function CreateFood() {
+  const { currentUser = {}  } = useAuthContext();
   return (
     <div className="container">
       <div className="container-fluid">
@@ -23,16 +25,14 @@ export default function CreateFood() {
               errors.description = "Required";
             } else if (!values.price) {
               errors.price = "Required";
-            } else if (!values.brand) {
-              errors.brand = "Required";
-            } 
+            }
             return errors;
           }}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             if (values) {
-              fetch("http://localhost:3000/products/create/", {
+              fetch("http://localhost:3003/products/create/", {
                 method: "POST",
-                body: JSON.stringify(values),
+                body: JSON.stringify({...values, brand: currentUser.brand}),
                 headers: {
                   "Content-Type": "application/json",
                   token: sessionStorage.getItem("_tk"),
@@ -107,16 +107,6 @@ export default function CreateFood() {
                       Food Available
                     </label>
                   </div>
-                  <TextInput
-                    label="Brand Name"
-                    id="brand"
-                    name="brand"
-                    type="text"
-                    value={values["brand"]}
-                    placeholder="Enter Brand Name"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                  />
                   <button type="submit" className="btn btn-sm btn-primary mr-2">
                     Create Food
                   </button>

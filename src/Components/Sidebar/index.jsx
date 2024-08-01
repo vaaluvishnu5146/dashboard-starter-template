@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Icons from "../../Assets/icons";
 import NavItemExpandable from "../NavItem/NavItemExpandable";
 import { useAuthContext } from '../../Context/AuthContext';
+import { useBrandContext } from "../../Context/BrandContext";
 
 const PRODUCT_ROUTES = [
   {
@@ -38,6 +39,13 @@ const FOOD_ROUTES = [{
     id: "manageFoods",
   },
 ];
+const ORDER_ROUTES = [
+  {
+    label: "Manage Orders",
+    to: "/dashboard/orders/manage",
+    id: "manageOrders",
+  },
+];
 const USER_ROUTES = [{
     label: "Create User",
     to: "/dashboard/user/create",
@@ -53,6 +61,7 @@ const USER_ROUTES = [{
 export default function Sidebar() {
   const sidebarRef = useRef(null);
   const {currentUser = {}} = useAuthContext();
+  const { brand = {} } = useBrandContext();
   function handleSidebarToggle() {
     if (sidebarRef.current.classList.contains("toggled")) {
       sidebarRef.current.classList.remove("toggled");
@@ -71,7 +80,7 @@ export default function Sidebar() {
         <div className="sidebar-brand-icon rotate-n-15">
           <i className="fas fa-laugh-wink"></i>
         </div>
-        <div className="sidebar-brand-text mx-3">ByOnline</div>
+        <div className="sidebar-brand-text mx-3">{brand?.name}</div>
       </div>
 
       <hr className="sidebar-divider" />
@@ -87,6 +96,11 @@ export default function Sidebar() {
       routes = {
         FOOD_ROUTES
       }
+      />
+      <NavItemExpandable 
+        id="orders"
+        label="Orders"
+        routes={ORDER_ROUTES}
       />
       {currentUser && currentUser.isSuperAdmin 
         ? <NavItemExpandable 

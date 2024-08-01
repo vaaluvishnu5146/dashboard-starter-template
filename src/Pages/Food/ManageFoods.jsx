@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react"
 import { showToast } from "../../Assets/toasts";
+import { useAuthContext } from "../../Context/AuthContext";
 
 export default function ManageFoods() {
     const [products, setProducts] = useState([])
+    const { currentUser = {} } = useAuthContext();
+
     useEffect(() => {
-        fetch("http://localhost:3000/products/", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: sessionStorage.getItem("_tk"),
-            }
-        })
-        .then((response) => response.json())
-        .then((result) => {
-            showToast(result.message)
-            setProducts(result.response)
-        })
-        .catch((error) => {
-            showToast(error.message, "error")
-        })
-    }, []);
+        if (currentUser) {
+            fetch(`http://localhost:3003/products/${currentUser.brand}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: sessionStorage.getItem("_tk"),
+                }
+            })
+            .then((response) => response.json())
+            .then((result) => {
+                showToast(result.message)
+                setProducts(result.response)
+            })
+            .catch((error) => {
+                showToast(error.message, "error")
+            })
+        }
+    }, [currentUser]);
+
   return (
     <div className="container">
     <table className="table">
